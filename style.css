@@ -1,0 +1,112 @@
+:root {
+    --primary: #8b5cf6;
+    --secondary: #d1d5db;
+    --bg: #020617;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.app-container { width: 100%; max-width: 400px; text-align: center; position: relative; }
+
+.stage { display: none; opacity: 0; transform: translateY(20px); transition: 0.6s all ease; }
+.stage.active { display: block; opacity: 1; transform: translateY(0); }
+
+/* Input Styling - Consistent & Aligned */
+.input-card {
+    background: var(--glass);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, select, button {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Fixed Dropdown Visibility */
+select option { background: #0f172a; color: white; }
+
+button {
+    background: var(--primary);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover { background: #7c3aed; transform: translateY(-2px); }
+.skip-btn { background: transparent; border: 1px dashed #475569; font-size: 0.8rem; }
+
+/* The Ball Bounce (Horizontal & Smooth) */
+.pitch-container {
+    height: 120px;
+    width: 280px;
+    margin: 0 auto;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+.ball-sprite {
+    width: 60px; height: 60px;
+    background: radial-gradient(circle at 30% 30%, var(--primary), #4c1d95);
+    border-radius: 50%;
+    position: absolute; bottom: 0;
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 1.4rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    animation: sideSlide 4s infinite ease-in-out;
+}
+@keyframes sideSlide {
+    0%, 100% { left: 0; transform: rotate(0deg); }
+    50% { left: calc(100% - 60px); transform: rotate(720deg); }
+}
+
+/* Envelope & Letter Logic */
+.envelope-area { margin-top: 50px; cursor: pointer; }
+.envelope {
+    width: 200px; height: 130px; background: #334155;
+    margin: 0 auto; position: relative; border-radius: 8px;
+    transition: 0.5s;
+}
+.envelope-top {
+    position: absolute; top: 0; width: 0; height: 0;
+    border-left: 100px solid transparent; border-right: 100px solid transparent;
+    border-top: 70px solid #475569; z-index: 5; transform-origin: top; transition: 0.4s;
+}
+.letter-inner {
+    position: absolute; bottom: 10px; left: 10px; width: 180px; height: 110px;
+    background: #f8fafc; color: #1e293b; padding: 15px; border-radius: 6px;
+    z-index: 2; opacity: 0; transition: 0.6s; font-size: 0.85rem; overflow: hidden;
+}
+.envelope.open .envelope-top { transform: rotateX(180deg); z-index: 1; }
+.envelope.open .letter-inner { transform: translateY(-110px); opacity: 1; height: 180px; z-index: 6; box-shadow: 0 -10px 30px rgba(0,0,0,0.5); }
+
+/* Star Field Effect */
+.star-cluster {
+    width: 100%; height: 200px;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: starPulse 2s infinite alternate;
+}
+@keyframes starPulse { from { opacity: 0.2; } to { opacity: 0.8; } }
+
+.hint { font-size: 0.75rem; color: #94a3b8; }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeArc | Premium Age Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body onclick="createRipple(event)">
+    
+    <div class="app-container">
+        <div class="stage active" id="stageName">
+            <p class="quote">"Your story begins with a name."</p>
+            <div class="input-card">
+                <input type="text" id="userName" placeholder="What is your name?" autocomplete="off">
+                <button onclick="toStage('stageName', 'stageYear')">Next</button>
+            </div>
+        </div>
+
+        <div class="stage" id="stageYear">
+            <p class="quote">"A year is a leap into the unknown."</p>
+            <div class="input-card">
+                <input type="number" id="yearIn" placeholder="Birth Year (YYYY)" oninput="autoNext(this, 4, 'stageYear', 'stageMonth')">
+                <p class="hint">Type 4 digits to auto-advance</p>
+            </div>
+        </div>
+
+        <div class="stage" id="stageMonth">
+            <p class="quote">"Cycles of the moon, seasons of life."</p>
+            <div class="input-card">
+                <select id="monthIn" onchange="toStage('stageMonth', 'stageDay')">
+                    <option value="" disabled selected>Select Month</option>
+                    <option value="0">January</option><option value="1">February</option>
+                    <option value="2">March</option><option value="3">April</option>
+                    <option value="4">May</option><option value="5">June</option>
+                    <option value="6">July</option><option value="7">August</option>
+                    <option value="8">September</option><option value="9">October</option>
+                    <option value="10">November</option><option value="11">December</option>
+                </select>
+                <button class="skip-btn" onclick="toStage('stageMonth', 'stageDay')">Skip Month</button>
+            </div>
+        </div>
+
+        <div class="stage" id="stageDay">
+            <p class="quote">"Every day is a fresh start."</p>
+            <div class="input-card">
+                <input type="number" id="dayIn" placeholder="Day (DD)" oninput="autoNext(this, 2, 'stageDay', 'stageProcess')">
+                <button class="skip-btn" onclick="toStage('stageDay', 'stageProcess')">Skip Day</button>
+            </div>
+        </div>
+
+        <div class="stage" id="stageProcess">
+            <div class="star-wrap">
+                <div class="star-cluster"></div>
+                <h2 class="glow-text">Mapping the Stars...</h2>
+            </div>
+        </div>
+
+        <div class="stage" id="stageReveal">
+            <div class="pitch-container">
+                <div id="ball" class="ball-sprite">0</div>
+                <div class="bat-line"></div>
+            </div>
+            
+            <h1 class="age-main"><span id="finalAge">0</span> <small>Years of Wisdom</small></h1>
+            <p id="inspiringQuote" class="reveal-quote"></p>
+
+            <div class="envelope-area" onclick="toggleEnvelope()">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-top"></div>
+                    <div class="letter-inner" id="letter">
+                        <h4>Special Note</h4>
+                        <p id="suggestionText"></p>
+                        <p id="wishesText"></p>
+                    </div>
+                </div>
+                <p class="envelope-hint">Click the envelope to read your wish</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
